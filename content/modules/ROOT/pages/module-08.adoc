@@ -1,0 +1,109 @@
+= Identify vulnerable deployment
+
+You've just revieved some bad news about an ex-CandleCo employee.
+
+A previous admin is rumored to have installed some cryptomining software somewhere in the environment.
+
+The legal team has requested you to see if this is true, and if you do find something to immeditaly stop it from working.
+
+You're going to need to use RHACS to find the deployment running the code and get it under control!
+
+Luckily, RHACS has this power built in! Are you ready?
+
+== Step 1
+
+* In RHACS go to the Violations section. Use the filter tools there to filter for a Policy that you think could be used to detect Cryptocurrency Mining Process Execution.
+
+image::task8-1.png[task8-1]
+
+== Step 2
+
+* Now that you found the _Policy_ you can use it to track down the cryptominer. But first you need to configure the policy. You do this by _editing_ the policy.
+
+* You edit policies by going to *Platform Configuration > Policy Management*
+
+* Just like before you can filter by Policy for the type (Crypto) you want to change:
+
+image::task8-2.png[task8-2]
+
+* Once you find the policy you'll need to find the option to Edit it.
+
+* Review the various sections of the Policy that can be edited:
+
+image::task8-3.png[task8-3]
+
+* Now find the section that allows you to adjust the policy's behavior.
+
+* The default behavior for a policy is to Inform what it finds. This tells you what's wrong, but doesn't act on it.
+
+* Since we were asked to take action on the cryptominer you need to change the setting so it will also enforce as well as inform.
+
+image::task8-4.png[task8-4]
+
+* Additionally, so we can see the policy in action we need to set "Configure enforcement behavior" to apply enforcement at Runtime.
+
+* The "Inform and enforce" toggle reveals this option, don't miss it!
+
+image::task8-5.png[task8-5]
+
+* With that done you can save the policy.
+
+* The policy behavior section should indicate the following choices:
+
+image::task8-6.png[task8-6]
+
+== Step 3
+
+* Now it's time to see what the policy found and sort this out!
+
+* Head back to the RHACS dashboard and locate the *Policy violations by category* tile. You'll see the Crypto policy listed there. Click on it.
+
+image::task8-7.png[task8-7]
+
+* You now know what deployment the employee put their cryptominer into!
+
+* But notice that it still shows "No" under Enforced? That's because RHACS is set to monitor this at Runtime which means only newly started infected deployments will get stopped automatically by RHACS.
+
+== Step 4
+
+* Now we're going to see how RHACS handles that Runtime enforcement.
+
+* Go back to Cloud9 and delete the suspect pod using the following:
+
+_TIP: you'll need to use kubectl get pod -n candleco to find your pod's exact name so you can ru the command below_
+
+[source,shell]
+----
+kubectl delete pod -n candleco candleco-images-deployment-xxxxxxxxxxx 
+----
+
+Then watch as it restarts:
+
+[source,shell]
+----
+kubectl get pods -n candleco --watch
+----
+
+What do you see?
+
+=== Reveal output of watch command
+
+[%collapsible]
+====
+
+* Each time the deployment tries to restart it is automatically terminated by ACS!
+
+image::task8-8.gif[task8-8]
+
+====
+
+== View the result in the ACS CS UI
+
+* Head back to RHACS and use the dashboard to find the "Policy violations by category" tile.
+
+* Follow the Cryptocurrency Mining link and you can see the result.
+
+image::task8-9.png[task8-9]
+
+*You've done it, you stopped the cryptominer!*
+

@@ -51,7 +51,7 @@ This leads you to the instance's information panel.
 
 image::task3-2.png[task3-2]
 
-=== Generate an API token
+== Generate an API token
 
 * After logging into the ACS UI go to Platform Configuration > Integrations > Authentication Tokens and choose API Token:
 
@@ -67,7 +67,7 @@ Choose Generate and be sure to copy and record the output. *You will need this t
 
 image::task3-5.png[task3-5]
 
-=== Create a Red Hat Service Account and get its token
+== Create a Red Hat Service Account and get its token
 
 Login to the https://access.redhat.com/terms-based-registry/[Red Hat console] and create a service account.
 
@@ -89,7 +89,7 @@ image::task3-8.png[task3-8]
 
 _Be sure to record the full username (remember, this includes the numbers, the pipe, and the name!) and the token._
 
-=== Create an ACS Init Bundle
+== Create an ACS Init Bundle
 
 * In the ACS UI go to *Platform Configurations > Integrations > Cluster Init Bundle*:
 
@@ -111,7 +111,7 @@ image::task3-11.png[task3-11]
 
 * Now, download the Kubernetes secrets file by selecting *Download Kubernetes secrets file*. Save this file locally as well!
 
-=== Upload the ACS init bundle to Cloud9
+== Upload the ACS init bundle to Cloud9
 
 * From Cloud9 choose File > Upload Local Files:
 
@@ -123,7 +123,7 @@ image::task3-13.png[task3-13]
 
 * You will use it in a future step.
 
-=== Deploy the ACS agent to EKS
+== Deploy the ACS agent to EKS
 
 * Create a namespace for the ACS agent to run in.
 
@@ -184,7 +184,7 @@ $ kubectl get deployment -n stackrox
 
 *All should be running after 1-2 minutes.*
 
-=== View your new cluster in ACS!
+== View your new cluster in ACS!
 
 Phew! You made it!
 

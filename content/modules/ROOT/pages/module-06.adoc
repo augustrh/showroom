@@ -1,0 +1,111 @@
+= Monitor Amazon Elastic Container Registry (ECR) with ACS
+
+After you finish the scans of EKS and ROSA you find out from one of your dev teams that CandleCo also uses AWS Elastic Container Registry to manage their images.
+
+And you're in luck! ACS CS can be intergated into ECR to monitor images there, so let's do that now!
+
+To do this you're going to connect CandleCo's ECR to your ACS CS instance and scan the images they have in there.
+
+== Get environment details
+
+* You need to gather a few details, such as your ECR registry ID, AWS Region, and the key and secret key for the precreated AWS ECR user to use with this task.
+
+* Follow the steps below on your Cloud9 instance to get record the values.
+
+* Get your registry ID and images:
+
+[source,shell]
+----
+$ aws ecr describe-repositories --query "repositories[].[registryId]" --output text | uniq
+$ aws ecr describe-repositories --query "repositories[].[repositoryUri]" --output text
+----
+
+* Get your region
+
+[source,shell]
+----
+$ echo $AWS_REGION
+----
+
+* Review the access keys for AWS Environment
+
+AWS Access Key: {{ aws_access_key_id }}
+AWS Secret Access Key: {{ aws_secret_access_key }}
+
+== Connect ACS CS and ECR
+
+* Next up, you need to integrate RHACS and ECR. Do this via the RHACS console's "Integrations" section.
+
+* Go to the RHACS console and choose Platform Configration > Integrations and find the AWS Amazon ECR tile:
+
+image::task6-1.png[task6-1]
+
+* Choose the "New integration" button
+
+image::task6-2.png[task6-2]
+
+* Fill out the form with the details you retrieved above.
+
+*NOTE: Leave the Endpoint field blank as RHACS constructs the endpoint from info you are providing.*
+
+* Add the Access key ID and Secret Access key you retrieved from the Jam console in the steps above.
+
+image::task6-3.png[task6-3]
+
+_Tip: Choose "Test" to check the configuration, you should see a green success confirmation._
+
+* Choose "Save" to save the integration.
+
+== Monitor the images in ECR with ACS CS
+
+* Once RHACS and ECR are integrated you need to monitor your images. To monitor an image to RHACS you need to create a watch.
+
+* In RHACS go to Vulnerability Management (1.0) > Dashboard and choose the "Images" header
+
+image::task6-4.png[task6-4]
+
+* From the next screen choose "Manage Watches"
+
+image::task6-5.png[task6-5]
+
+* Add all the images you retrieved on the Cloud9 console above to be watched.
+
+image::task6-6.png[task6-6]
+
+* Once all images are added choose "Close"
+
+* Your images are now visible in the list and are being scanned. Try exploring them.
+
+image::task6-7.png[task6-7]
+
+*RHACS is now successfully integrated with ECR.*
+
+== Explore image scanning
+
+* With RHACS you can dig into an image and see security analysis components inside your image.
+
+image::task6-7.png[task6-11]
+
+* There is an example of a vulnerable image you can find. Click on a row containing the candleco-images image:
+
+image::task6-8.png[task6-8]
+
+* This will open a page showing the details of the image:
+
+image::task6-9.png[task6-9]
+
+* Look for things like the "Top riskiest image components" tile and more!
+
+image::task6-10.png[task6-9]
+
+
+
+
+
+
+
+
+
+
+
+

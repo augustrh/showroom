@@ -1,0 +1,37 @@
+= Identify vulnerable container image
+
+For this next module let's see if you can find the vulnerbility. The steps are below, but see if you can do it without looking! :)
+
+== The challenge
+
+An image containing a struts vulnerability is in the ECR.
+
+But now that you have become familiar with using ACS CS this challenge is to find out more about it.
+
+Use the ACS UI to find what version of a struts vulnerability can be found in an image.
+
+== The solution
+
+Reveal the solution by clicking the Details option below.
+
+[%collapsible]
+====
+* On the left side menu, select "Dashboard" under "Vulnerability Management (1.0)
+
+image::task7-1.png[task7-1]
+
+* On the top right, click the button showing the number of images.
+
+image::task7-2.png[task7-2]
+
+* Locate the image with the most critical vulnerabilities.
+
+image::task7-3.png[task7-3]
+
+* Scroll to find the Struts vulnerability, or use the search bar to search for "Component" and "struts".
+
+image::task7-4.png[task7-4]
+====
+
+
+
