@@ -1,0 +1,39 @@
+= Run a compliance scan on the newly added clusters (ROSA and EKS)
+
+* Now that you have everything setup, you want to run a compliance scan of the entire environment and submit a report on the findings.
+
+* For this exercise we will generate a report and add it to your company's S3 bucket.
+
+== Performing a Scan
+
+* From ACS CS Select "Compliance" on the left side menu.
+
+image::task5-1.png[task5-1]
+
+* Click on "Scan Environment" button in the top right of the window.
+
+image::task5-2.png[task5-2]
+
+== Exporting the report
+
+* Click on "Export" in the top right and "Download Evidence as CSV."
+
+image::task5-3.png[task5-3]
+
+== Upload the report to the provided S3 bucket.
+
+* Upload to Cloud9 by going to File > Upload Local Files
+
+* Use AWS cli to move the file to bucket:
+
+[source,shell]
+----
+$ aws s3 mv FILENAME s3://$S3BUCKET
+----
+
+_TIP: the name of the S3 bucket is saved in the environment varible *$S3BUCKET* :)_
+
+
+
+
+
