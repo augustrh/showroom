@@ -109,6 +109,8 @@ image::task3-11.png[task3-11]
 
 * This will download a file named *ekscluster-cluster-init-bundle.yaml*. Keep track of it! ;)
 
+* Now, download the Kubernetes secrets file by selecting *Download Kubernetes secrets file*. Save this file locally as well!
+
 === Upload the ACS init bundle to Cloud9
 
 * From Cloud9 choose File > Upload Local Files:

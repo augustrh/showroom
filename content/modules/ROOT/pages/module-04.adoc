@@ -1,0 +1,74 @@
+= Add Secure Cluster (operator) to ROSA
+
+Now that EKS is connected to ACS CS you'll need to connect your ROSA environment.
+
+== Connect to ROSA
+
+* Your ROSA cluster is available at
+
+      ROSA URL: "{{ xxx }}"
+      ROSA user: cluster-admin
+      ROSA password: "{{ pass }}"
+
+* Click on the OpenShift console link and use the provided User and Password details to login:
+
+image::task4-1.png[task4-1]
+
+* Once logged in, click on "Operators" in left menu, then OperatorHub
+* In the Filter by Keyword box, search for ACS:
+
+image::task4-2.png[task4-2]
+
+* Click on Advanced Cluster Security for Kubernetes then Install on the window that appears:
+
+image::task4-3.png[task4-3]
+
+* Keep all of the default options and click install.
+
+image::task4-4.png[task4-4]
+
+* Wait while the operator installs.
+
+image::task4-5.png[task4-5]
+
+* Once the installation is complete, click on View Operator.
+
+* We now need to setup the Secure Cluster for your ROSA deployment. This is done in a few steps.
+
+* Using the Kubernetes Secrets file you downloaded in the previous task, create the secrets in your ROSA environment
+
+image::task4-6.png[task4-6]
+
+* Click on the + sign in the top of the window, next to the bell icon.
+* Make sure you are in the rhacs-operator project and drag and drop the Kubernetes Secrets file yaml file into the window.
+
+image::task4-7.png[task4-7]
+
+* Now that the yaml information is there, click the Create button.
+
+image::task4-8.png[task4-8]
+
+* Once the resources have have been created successfully, click on Operators, then Installed Operators on the left menu.
+
+image::task4-9.png[task4-9]
+
+* To the right of ACS, select SecuredCluster.
+
+* In the SecuredCluster Window, click Create SecuredCluster
+
+image::task4-10.png[task4-10]
+
+* Change the cluster name to rosa-cluster and the Central Endpoint to acs-data-* * ACS_ID* * .acs.rhcloud.com:443, where ** * ACS_ID * ** is replaced by your ACS ID.
+
+image::task4-11.png[task4-11]
+
+* The Central Endpoint address can also be copied from the RH Console where you got your ACS ID in the "Central API endpoint (Sensor mTLS)" field.
+
+image::task4-12.png[task4-12]
+
+* Click Create.
+
+* Head back to your ACS instance and wait for the rosa-cluster to appear.
+
+image::task4-13.png[task4-13]
+
