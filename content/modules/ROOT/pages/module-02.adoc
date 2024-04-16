@@ -6,7 +6,24 @@
 
 Next you will launch the actual ACS CS instance within the Red Hat Console. For the trial this is entirely hosted in a Red Hat account with no cost to you!
 
-*Please prefix your Central instance name with "jam". i.e. "jam-central".*
+== Launch the instance of ACS CS
+
+*Please prefix your Central instance name with "summit". i.e. "summit-central".*
+
+. Click on Create Instance.
+
+. Click on Create ACS Instance.
+
+. Choose a name for your Central instance (cannot have spaces, special characters, or capitals). Please prefix your Central instance name with "jam". i.e. "jam-central".
+
+image::task2-1.png[task2-1,55%]
+
+. Click create instance.
 
 _Note: Deployment time may take around 15-20 minutes. Monitor the Red Hat Console for ACS provisioning status:_
+
+*Once your ACS CS instance is provisioning please let the proctors know as we will do a small presentation while we all wait for our instances to provision.*
+
+image::task2-2.png[task2-2,55%]
+
 

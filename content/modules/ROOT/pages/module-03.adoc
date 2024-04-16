@@ -1,0 +1,191 @@
+= Monitor an Amazon Elastic Kubernetes Service (EKS) cluster with Red Hat Advanced Cluster Security Cloud Service
+
+Now that your Red Hat Advanced Cluster Security Cloud Service (RHACS CS) is up and running it's time to connect it to CandleCo's Elastic Kubernetes Service (EKS) deployment.
+
+You do this by deploying a RHACS "agent" to your EKS cluster which can report back to RHACS.
+
+This agent runs a few small processes on the cluster.
+
+== Logging into your environment
+
+For the lab you have access to an AWS environment containing EKS and ECR. This is the CandleCo environment. To make things easy you'll also have a Cloud9 environment providing you a CLI for all the tasks. 
+
+You also have a ROSA environment as well. 
+
+The details for your environment are below:
+
+      AWS Console User Name: "{{ admin_console_user_name }}"
+      AWS Console Password: "{{ admin_console_password }}"
+      AWS Account ID: "{{ sandbox_account_id }}"
+      AWS Cloud9 URL: "{{ admin_cloud9_url }}"
+
+Simply open the Cloud9 URL and provide the authentication details when prompted.
+
+== Prep Cloud9
+
+First, you need to run the environment prep script on the Cloud9 CLI.
+
+_IMPORTANT: This installs essentials tools and files for this challenge so please don't skip it!_
+
+[source,shell]
+----
+$ wget https://raw.githubusercontent.com/augustrh/rhsummit2024/main/acs-jam-c9-prep-summit.sh
+$ source acs-jam-c9-prep-summit.sh
+----
+
+*Now on to the challenge!*
+
+== Create ACS API Token
+
+This token allows you to authenticate with ACS via the API and is helpful to use in automating the process of adding clusters for montoring.
+
+* You'll find your RHACS instance in the https://console.redhat.com/application-services/acs/instances[Red Hat Console,window=_blank]
+* Once there, you'll see the instance you created in the list (it's likely the only one). Click on the instance's name:
+
+image::task3-1.png[task3-1]
+
+This leads you to the instance's information panel. 
+
+* There you can click on the blue "Open ACS Console" button to open the console.
+* You will also find important "Instance Details" showing you the specific details of your instance as well as the Central API endpoint (Sensor mTLS) and Central instance (UI, roxctl) values.
+
+image::task3-2.png[task3-2]
+
+=== Generate an API token
+
+* After logging into the ACS UI go to Platform Configuration > Integrations > Authentication Tokens and choose API Token:
+
+image::task3-3.png[task3-3]
+
+* Choose Generate Token
+
+* Name the token and set the Role to Admin
+
+image::task3-4.png[task3-4]
+
+Choose Generate and be sure to copy and record the output. *You will need this token later and it cannot be regenerated.*
+
+image::task3-5.png[task3-5]
+
+=== Create a Red Hat Service Account and get its token
+
+Login to the https://access.redhat.com/terms-based-registry/[Red Hat console] and create a service account.
+
+* You'll need this to retrieve the RHACS images from the Red Hat registry with your Red Hat credentials.
+
+* Choose *New Service Account* and use the name *acsjam2023*. You'll need *both* the numbers and the name for future steps:
+
+image::task3-6.png[task3-6]
+
+* Click *Create*
+
+* Retrieve the token:
+
+image::task3-7.png[task3-7]
+
+* And copy it!
+
+image::task3-8.png[task3-8]
+
+_Be sure to record the full username (remember, this includes the numbers, the pipe, and the name!) and the token._
+
+=== Create an ACS Init Bundle
+
+* In the ACS UI go to *Platform Configurations > Integrations > Cluster Init Bundle*:
+
+image::task3-9.png[task3-9]
+
+* Choose *Generate bundle*
+
+* Name the bundle "ekscluster" (*please don't change this name and use as show here*):
+
+image::task3-10.png[task3-10]
+
+* And choose Generate
+
+* On the Create Integration choose the *Download Helm values file* option:
+
+image::task3-11.png[task3-11]
+
+* This will download a file named *ekscluster-cluster-init-bundle.yaml*. Keep track of it! ;)
+
+=== Upload the ACS init bundle to Cloud9
+
+* From Cloud9 choose File > Upload Local Files:
+
+image::task3-12.png[task3-12]
+
+* And select the file you just downloaded:
+
+image::task3-13.png[task3-13]
+
+* You will use it in a future step.
+
+=== Deploy the ACS agent to EKS
+
+* Create a namespace for the ACS agent to run in.
+
+[source,shell]
+----
+$ kubectl create namespace stackrox
+----
+
+* Create a secret that uses the Red Hat Console service account's token:
+** You need to replace *12345678|RHSA* with the full name for your service account. This includes the number, the pipe, and the name.
+** You need to replace **RHSA_TOKEN** with the service account token from above. This is NOT the ACS API token.
+** The command will look something like this:
+
+image::task3-14.png[task3-14]
+
+_TIP: Use the below command and make your substitutions a little easier:_
+
+[source,shell]
+----
+$ kubectl create secret docker-registry redhatreg --docker-server=registry.redhat.io --docker-username="**12345678|RHSA**" --docker-password="**RHSA_TOKEN**" -n stackrox
+----
+
+* Add the official ACS helm chart to deploy the ACS sensor to EKS.
+
+[source,shell]
+----
+$ helm repo add rhacs https://mirror.openshift.com/pub/rhacs/charts/
+----
+
+* Install the agent from the bundle with the helm chart, secret, and init bundle (ekscluster-cluster-init-bundle.yaml)
+
+* To do this you need to replace the ACS_ID shown in the sample below with the actual ACS ID of your instance.
+
+* You can find this value in the ACS instance's information panel in the Red Hat Console.
+
+_TIP: Find your instance in the https://console.redhat.com/application-services/acs/instances[Red Hat console], choose your instance's name, and find the panel to locate the ID_
+
+* The instance name is a series of randomised letters and number that you can copy/paste from the console easily; it looks something like this:
+
+image::task3-15.png[task3-15]
+
+_TIP: Use the below command and make your substitutions a little easier:_
+
+[source,shell]
+----
+$ helm install -n stackrox stackrox-secured-cluster-services rhacs/stackrox-secured-cluster-services -f ekscluster-cluster-init-bundle.yaml --set clusterName=myEKS --set imagePullSecrets.useExisting=redhatreg --set centralEndpoint=https://acs-data-**ACS_ID**.acs.rhcloud.com:443 -f sensor-jam.yaml
+----
+
+_NOTE: You may have noticed the -f sensor-jam.yaml flag on the helm install. That is simply to reduce the CPU and Memory limits for the ACS sensor due to limitations in the Lab environment._
+
+* Ensure the pods and deployments start up properly:
+
+[source,shell]
+----
+$ kubectl get pods -n stackrox
+$ kubectl get deployment -n stackrox
+----
+
+*All should be running after 1-2 minutes.*
+
+=== View your new cluster in ACS!
+
+Phew! You made it!
+
+On ACS go to Platform Configuration > Clusters and view the EKS deployment.
+
+Nice one!
