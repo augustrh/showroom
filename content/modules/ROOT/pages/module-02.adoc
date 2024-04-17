@@ -1,6 +1,6 @@
 = Deploy Central via the Red Hat Console.
 
-<<<Text about what this is>>>
+Achieve faster time to value by quickly deploying Red Hat Advanced Cluster Security for Kubernetes as a fully managed Software as a Service (SaaS) solution that reduces costly maintenance and management activity. With no infrastructure to manage, security operators can instead focus on risk reduction and incident triage.
 
 == Deploy the Central Instance
 
