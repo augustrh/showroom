@@ -10,16 +10,18 @@ This agent runs a few small processes on the cluster.
 
 For the lab you have access to an AWS environment containing EKS and ECR. This is the CandleCo environment. To make things easy you'll also have a Cloud9 environment providing you a CLI for all the tasks. 
 
-You also have a ROSA environment as well. 
-
 The details for your environment are below:
 
-      AWS Console User Name: "{{ admin_console_user_name }}"
-      AWS Console Password: "{{ admin_console_password }}"
-      AWS Account ID: "{{ sandbox_account_id }}"
-      AWS Cloud9 URL: "{{ admin_cloud9_url }}"
+      AWS Console User Name: { eks_cluster_aws_web_console_user_name }
+      AWS Console Password: { eks_cluster_aws_web_console_password }
+      AWS Account ID: { eks_cluster_aws_account_id }
+      AWS Cloud9 URL: { eks_cluster_aws_cloud9_url }
 
-Simply open the Cloud9 URL and provide the authentication details when prompted.
+ }}"
+
+Simply open the Cloud9 URL and provide the AWS authentication details when prompted.
+
+_Note: You also have a ROSA environment as well and those details are provided in a later module._
 
 == Prep Cloud9
 

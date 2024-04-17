@@ -6,9 +6,9 @@ Now that EKS is connected to ACS CS you'll need to connect your ROSA environment
 
 * Your ROSA cluster is available at
 
-      ROSA URL: "{{ xxx }}"
-      ROSA user: cluster-admin
-      ROSA password: "{{ pass }}"
+      ROSA Console: {rosa_cluster_rosa_console_url}
+      ROSA admin user: {rosa_cluster_rosa_admin_user}
+      ROSA admin user password: {rosa_cluster_rosa_console_password}
 
 * Click on the OpenShift console link and use the provided User and Password details to login:
 
