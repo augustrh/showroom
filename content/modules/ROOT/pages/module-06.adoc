@@ -29,7 +29,7 @@ $ echo $AWS_REGION
 
 * Access keys for AWS Environment
 
-[%autowidth,cols="^.^a,^.^a"]
+[%autowidth,frame=ends,stripes=even]
 |===
 | AWS Access Key | {eks_cluster_aws_access_key_id}
 | AWS Secret Access Key | {eks_cluster_aws_secret_access_key}

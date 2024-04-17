@@ -14,7 +14,7 @@ The details for your environment are below:
 
 [%autowidth,cols="^.^a,^.^a"]
 |===
-| AWS Console User Name | {eks_cluster_aws_web_console_user_nam}
+| AWS Console User Name | {eks_cluster_aws_web_console_user_name}
 | AWS Console Password | {eks_cluster_aws_web_console_password}
 | AWS Account ID | {eks_cluster_aws_account_id}
 | AWS Cloud9 URL | {eks_cluster_aws_cloud9_url}

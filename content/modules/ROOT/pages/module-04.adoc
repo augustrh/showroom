@@ -6,7 +6,7 @@ Now that EKS is connected to ACS CS you'll need to connect your ROSA environment
 
 Your ROSA cluster is available at:
 
-[%autowidth,cols="^.^a,^.^a"]
+[%autowidth,frame=ends,stripes=even]
 |===
 | ROSA console URL | {rosa_cluster_rosa_console_url}
 | ROSA user | {rosa_cluster_rosa_admin_user}
