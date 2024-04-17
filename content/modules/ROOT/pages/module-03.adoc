@@ -12,7 +12,7 @@ For the lab you have access to an AWS environment containing EKS and ECR. This i
 
 The details for your environment are below:
 
-[%autowidth,cols="^.^a,^.^a"]
+[%autowidth,frame=ends,stripes=even]
 |===
 | AWS Console User Name | {eks_cluster_aws_web_console_user_name}
 | AWS Console Password | {eks_cluster_aws_web_console_password}
