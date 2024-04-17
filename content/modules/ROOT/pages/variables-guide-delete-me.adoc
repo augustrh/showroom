@@ -21,6 +21,8 @@ IMPORTANT: Once the showroom guide is created, please delete the file and remove
 |{counter:node} |rosa_cluster_rosa_console_password | {rosa_cluster_rosa_console_password}
 |{counter:node} |rosa_cluster_rosa_console_url | {rosa_cluster_rosa_console_url}
 |{counter:node} |rosa_cluster_rosa_console_user_name | {rosa_cluster_rosa_console_user_name}
+|{counter:node} |rosa_cluster_aws_access_key_id | {rosa_cluster_aws_access_key_id}
+|{counter:node} |rosa_cluster_aws_secret_access_key | {rosa_cluster_aws_secret_access_key}
 |===
 ****
 
@@ -34,6 +36,8 @@ IMPORTANT: Once the showroom guide is created, please delete the file and remove
 |{counter:nodea} |eks_cluster_aws_web_console_password | {eks_cluster_aws_web_console_password}
 |{counter:nodea} |eks_cluster_aws_web_console_url | {eks_cluster_aws_web_console_url}
 |{counter:nodea} |eks_cluster_aws_web_console_user_name | {eks_cluster_aws_web_console_user_name}
+|{counter:nodea} |eks_cluster_aws_access_key_id | {eks_cluster_aws_access_key_id}
+|{counter:nodea} |eks_cluster_aws_secret_access_key | {eks_cluster_aws_secret_access_key}
 |===
 ****
 
