@@ -27,10 +27,13 @@ $ aws ecr describe-repositories --query "repositories[].[repositoryUri]" --outpu
 $ echo $AWS_REGION
 ----
 
-* Review the access keys for AWS Environment
+* Access keys for AWS Environment
 
-AWS Access Key: { eks_cluster_aws_access_key_id }
-AWS Secret Access Key: { eks_cluster_aws_secret_access_key }
+[%autowidth,cols="^.^a,^.^a"]
+|===
+| AWS Access Key | {eks_cluster_aws_access_key_id}
+| AWS Secret Access Key | {eks_cluster_aws_secret_access_key}
+|===
 
 == Connect ACS CS and ECR
 

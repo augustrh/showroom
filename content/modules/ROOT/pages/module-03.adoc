@@ -12,12 +12,15 @@ For the lab you have access to an AWS environment containing EKS and ECR. This i
 
 The details for your environment are below:
 
-      AWS Console User Name: { eks_cluster_aws_web_console_user_name }
-      AWS Console Password: { eks_cluster_aws_web_console_password }
-      AWS Account ID: { eks_cluster_aws_account_id }
-      AWS Cloud9 URL: { eks_cluster_aws_cloud9_url }
+[%autowidth,cols="^.^a,^.^a"]
+|===
+| AWS Console User Name | {eks_cluster_aws_web_console_user_nam}
+| AWS Console Password | {eks_cluster_aws_web_console_password}
+| AWS Account ID | {eks_cluster_aws_account_id}
+| AWS Cloud9 URL | {eks_cluster_aws_cloud9_url}
+|===
 
-Simply open the Cloud9 URL and provide the AWS authentication details when prompted.
+*Simply open the Cloud9 URL and provide the AWS authentication details when prompted.*
 
 _Note: You also have a ROSA environment as well and those details are provided in a later module._
 
