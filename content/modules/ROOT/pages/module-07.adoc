@@ -4,7 +4,7 @@ For this next module let's see if you can find the vulnerbility. The steps are b
 
 == The challenge
 
-An image containing a struts vulnerability is in the ECR.
+An image containing a struts vulnerability is reported to be in your ECR.
 
 But now that you have become familiar with using ACS CS this challenge is to find out more about it.
 
