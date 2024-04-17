@@ -17,8 +17,6 @@ The details for your environment are below:
       AWS Account ID: { eks_cluster_aws_account_id }
       AWS Cloud9 URL: { eks_cluster_aws_cloud9_url }
 
- }}"
-
 Simply open the Cloud9 URL and provide the AWS authentication details when prompted.
 
 _Note: You also have a ROSA environment as well and those details are provided in a later module._

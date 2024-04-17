@@ -29,8 +29,8 @@ $ echo $AWS_REGION
 
 * Review the access keys for AWS Environment
 
-AWS Access Key: { aws_access_key_id }
-AWS Secret Access Key: { aws_secret_access_key }
+AWS Access Key: { eks_cluster_aws_access_key_id }
+AWS Secret Access Key: { eks_cluster_aws_secret_access_key }
 
 == Connect ACS CS and ECR
 
