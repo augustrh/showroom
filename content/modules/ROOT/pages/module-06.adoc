@@ -31,8 +31,8 @@ $ echo $AWS_REGION
 
 [%autowidth,frame=ends,stripes=even]
 |===
-| AWS Access Key | {eks_cluster_aws_access_key_id}
-| AWS Secret Access Key | {eks_cluster_aws_secret_access_key}
+| AWS Access Key: | {eks_cluster_aws_access_key_id}
+| AWS Secret Access Key: | {eks_cluster_aws_secret_access_key}
 |===
 
 == Connect ACS CS and ECR
