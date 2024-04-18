@@ -1,4 +1,4 @@
-* xref:module-01.adoc[Sign up and deoploy RHACS CS]
+* xref:module-01.adoc[Sign up and deploy RHACS CS]
 * xref:module-03.adoc[Monitor EKS with RHACS CS]
 * xref:module-04.adoc[Add secure cluster to ROSA]
 * xref:module-05.adoc[Run compliance scans]
