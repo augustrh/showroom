@@ -1,0 +1,17 @@
+= Conclusion
+
+As you can see RHAC CS is very powerful. For CandleCo and CyberPetals securing their hyrbid cloud environment is easy!
+
+Thanks for attending our lab. Your RHACS CS Environment will presist after this event for 60 days at no cost to you. 
+
+You'll receive an email in the mailbox of the account you used for your red hat account:
+
+image::task9-1.png[task9-1]
+
+Now that you have the details on how to use it please feel free to connect it to your own environments and test it all out even more! 
+
+Red Hat Advanced Cluster Security for Kubernetes can be run on-premises, on your cloud, or via a managed service like you experienced today. For more information head to Red Hat Advanced Cluster Security for Kubernetes[Red Hat Advanced Cluster Security for Kubernetes,window=_blank] or visit our booth here at Summit!
+
+Thanks again!
+
+

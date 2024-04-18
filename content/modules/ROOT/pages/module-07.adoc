@@ -1,37 +1,46 @@
-= Identify vulnerable container image
+= View a vulnerability in an image 
 
-For this next module let's see if you can find the vulnerbility. The steps are below, but see if you can do it without looking! :)
+Now that we've connected RHACS CS and ECR we can look deep into the images in our repositories.
 
-== The challenge
+== The Vulnerability dashboard
 
-An image containing a struts vulnerability is reported to be in your ECR.
+The Red Hat Advanced Cluster Security for Kubernetes (RHACS) Dashboard provides quick access to the data you need. Let's check out the Images section and dive into a candleco image for review.
 
-But now that you have become familiar with using ACS CS this challenge is to find out more about it.
+Go to Vulnerability Management (1.0) > Dashboard and click on the images box:
 
-Use the ACS UI to find what version of a struts vulnerability can be found in an image.
+image::task7-a.png[task7-a]
 
-== The solution
+Here you'll see all the images we are monitoring _across all our clusters_. So you'll see OpenShift and more in there as well as the ECR images we inherited from Candelco.
 
-Reveal the solution by clicking the Details option below.
+Let's look at only the candleco in their registries. In the filter box look for "Image Registry" and enter the registry name of your environment.
 
-[%collapsible]
-====
-* On the left side menu, select "Dashboard" under "Vulnerability Management (1.0)
+Hint: You can find that with the following command from Cloud9
 
-image::task7-1.png[task7-1]
+[source,shell]
+----
+aws ecr describe-repositories --query "repositories[].[repositoryUri]" --output text | awk -F "/" '/1/ {print $1}' | uniq
+----
 
-* On the top right, click the button showing the number of images.
+image::task7-b.png[task7-b]
 
-image::task7-2.png[task7-2]
+Notice the "Image Status" column shows both Inactive and Active images. The inactive images are included because of the Watches we created in the last task.
 
-* Locate the image with the most critical vulnerabilities.
+Click on the candleco-cart:latest image:
 
-image::task7-3.png[task7-3]
+As you can see there are a lot of issues with this image.
 
-* Scroll to find the Struts vulnerability, or use the search bar to search for "Component" and "struts".
+Click on the struts reference in the "Top riskiest components" panel:
 
-image::task7-4.png[task7-4]
-====
+image::task7-c.png[task7-c]
 
+Here we can dig even deeper. RHACS CS has found the component version, the location of the problem inside the image, and even offers information about which version is needed to fix it.
 
+image::task7-d.png[task7-d]
 
+Clicking on the list of CVE's for the image yields even more info. Including links to the full CVE and more.
+
+image::task7-e.png[task7-e]
+
+== Check it out
+
+Spend some time exploring the affected images in both ROSA and EKS. You'll quickly see how much information RHACS CS can gather for you across your hybrid cloud!
