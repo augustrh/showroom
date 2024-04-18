@@ -10,7 +10,7 @@ image::task9-1.png[task9-1]
 
 Now that you have the details on how to use it please feel free to connect it to your own environments and test it all out even more! 
 
-Red Hat Advanced Cluster Security for Kubernetes can be run on-premises, on your cloud, or via a managed service like you experienced today. For more information head to Red Hat Advanced Cluster Security for Kubernetes[Red Hat Advanced Cluster Security for Kubernetes,window=_blank] or visit our booth here at Summit!
+Red Hat Advanced Cluster Security for Kubernetes can be run on-premises, on your cloud, or via a managed service like you experienced today. For more information head to https://www.redhat.com/en/technologies/cloud-computing/openshift/advanced-cluster-security-kubernetes[Red Hat Advanced Cluster Security for Kubernetes,window=_blank] or visit our booth here at Summit!
 
 Thanks again!
 

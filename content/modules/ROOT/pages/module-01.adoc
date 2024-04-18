@@ -12,24 +12,51 @@ Sign up for the ACS Cloud Service trial https://www.redhat.com/en/technologies/c
 
 After your register or login with your Red Hat account you will see a sign up box like the following:
 
-image::task1-1.png[task1-1,55%,55%]
+image::task1-1.png[task1-1]
 
 * Click on "Start Your Trial"
 
-* Log into, or create your Red Hat account.
+* Login to, create, or update your Red Hat account if required.
 
-* You'll be presented with a small interface tour taking you through the process of creating your instance. Follow the steps and create your instance:
+* *Wait a moment before clicking anything :) * You'll be presented with a small interface tour taking you through the process of creating your instance. Follow the steps and create your instance:
 
-PICTURE FROM TOUR
+* Step 1 of 9: Get Started
 
-* When it's time to name your instance, name it *summit-central*.
+image::task1-tour1.png[task1-tour1]
 
-PICTURE OF NAME YOUR INSTANCE
+* Step 2 of 9: Follow the link
 
-* When you reach step 9 of 9 just click "Done" and wait for your instance to provision.
+image::task1-tour2.png[task1-tour2]
 
-image::task1-2.png[task1-2]
+* Step 3 of 9: Create your instance
 
-*  It will take about 10 minutes. *Let us know when you hit this stage as we will do a small presentation about ACS while we all wait.*
+image::task1-tour3.png[task1-tour3]
+
+* Step 4 of 9: Please name your instance *summit-central*
+
+image::task1-tour4.png[task1-tour4]
+
+* Step 5 of 9: You don't need to select an AWS account as we host the trial in our AWS account
+
+image::task1-tour5.png[task1-tour5]
+
+* Step 6 of 9: For today's lab use US East.
+
+image::task1-tour6.png[task1-tour6]
+
+* Step 7 of 9: Create your instance!
+
+image::task1-tour7.png[task1-tour7]
+
+* Step 8 of 9: Won't be long now!
+
+image::task1-tour8.png[task1-tour8]
+
+* Step 9 of 9: Click "Done" and wait for your instance to provision.
+
+image::task1-tour9.png[task1-tour9]
+
+*  It will take about 10-15 minutes to provision your instance. 
+*  Let us know when you hit this stage as we will do a small presentation about ACS while we all wait.*
 
 image::task1-3.png[task1-3]
