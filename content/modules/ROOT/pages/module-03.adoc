@@ -17,12 +17,10 @@ The details for your environment are below:
 | AWS Console User Name: | {eks_cluster_aws_web_console_user_name}
 | AWS Console Password: | {eks_cluster_aws_web_console_password}
 | AWS Account ID: | {eks_cluster_aws_account_id}
-| AWS Cloud9 URL: | {eks_cluster_aws_cloud9_url}
+| AWS Cloud9 URL: | {eks_cluster_aws_cloud9_url}[{eks_cluster_aws_cloud9_url},window=_blank]
 |===
 
 *Simply open the Cloud9 URL and provide the AWS authentication details when prompted.*
-
-_Note: You also have a ROSA environment as well and those details are provided in a later module._
 
 == Prep Cloud9
 
@@ -35,8 +33,6 @@ _IMPORTANT: This installs essentials tools and files for this challenge so pleas
 $ wget https://raw.githubusercontent.com/augustrh/rhsummit2024/main/acs-jam-c9-prep-summit.sh
 $ source acs-jam-c9-prep-summit.sh
 ----
-
-*Now on to the challenge!*
 
 == Create ACS API Token
 
@@ -76,7 +72,7 @@ Login to the https://access.redhat.com/terms-based-registry/[Red Hat console] an
 
 * You'll need this to retrieve the RHACS images from the Red Hat registry with your Red Hat credentials.
 
-* Choose *New Service Account* and use the name *acsjam2023*. You'll need *both* the numbers and the name for future steps:
+* Choose *New Service Account* and use the name *rhsummit2024*. You'll need *both* the numbers and the name for future steps:
 
 image::task3-6.png[task3-6]
 
@@ -98,21 +94,15 @@ _Be sure to record the full username (remember, this includes the numbers, the p
 
 image::task3-9.png[task3-9]
 
-* Choose *Generate bundle*
+* Choose *Create bundle*
 
-* Name the bundle "ekscluster" (*please don't change this name and use as show here*):
+* Name the bundle "ekscluster" and select "EKS" for the _Platform of secured clusters_ option:
 
 image::task3-10.png[task3-10]
 
-* And choose Generate
+* And choose Download.
 
-* On the Create Integration choose the *Download Helm values file* option:
-
-image::task3-11.png[task3-11]
-
-* This will download a file named *ekscluster-cluster-init-bundle.yaml*. Keep track of it! ;)
-
-* Now, download the Kubernetes secrets file by selecting *Download Kubernetes secrets file*. Save this file locally as well!
+* This will download a file named *ekscluster-Helm-values-cluster-init-bundle.yaml*. Keep track of it! ;)
 
 == Upload the ACS init bundle to Cloud9
 
@@ -172,7 +162,7 @@ _TIP: Use the below command and make your substitutions a little easier:_
 
 [source,shell]
 ----
-$ helm install -n stackrox stackrox-secured-cluster-services rhacs/stackrox-secured-cluster-services -f ekscluster-cluster-init-bundle.yaml --set clusterName=myEKS --set imagePullSecrets.useExisting=redhatreg --set centralEndpoint=https://acs-data-**ACS_ID**.acs.rhcloud.com:443 -f sensor-jam.yaml
+$ helm install -n stackrox stackrox-secured-cluster-services rhacs/stackrox-secured-cluster-services -f ekscluster-Helm-values-cluster-init-bundle.yaml --set clusterName=myEKS --set imagePullSecrets.useExisting=redhatreg --set centralEndpoint=https://acs-data-**ACS_ID**.acs.rhcloud.com:443 -f sensor-jam.yaml
 ----
 
 _NOTE: You may have noticed the -f sensor-jam.yaml flag on the helm install. That is simply to reduce the CPU and Memory limits for the ACS sensor due to limitations in the Lab environment._
@@ -192,5 +182,7 @@ $ kubectl get deployment -n stackrox
 Phew! You made it!
 
 On ACS go to Platform Configuration > Clusters and view the EKS deployment.
+
+image::task3-16.png[task3-16]
 
 Nice one!

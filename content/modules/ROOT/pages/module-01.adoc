@@ -1,4 +1,4 @@
-= Sign up for the Red Hat Advanced Cluster Security Cloud Service Free Trial
+= Sign up for the Red Hat Advanced Cluster Security Cloud Service Free Trial and Deploy your Instance
 
 == Free trial
 
@@ -14,8 +14,22 @@ After your register or login with your Red Hat account you will see a sign up bo
 
 image::task1-1.png[task1-1,55%,55%]
 
-. Click on "Start Your Trial"
+* Click on "Start Your Trial"
 
-. Log into, or create your Red Hat account.
+* Log into, or create your Red Hat account.
 
-. Click on "Get Started"
+* You'll be presented with a small interface tour taking you through the process of creating your instance. Follow the steps and create your instance:
+
+PICTURE FROM TOUR
+
+* When it's time to name your instance, name it *summit-central*.
+
+PICTURE OF NAME YOUR INSTANCE
+
+* When you reach step 9 of 9 just click "Done" and wait for your instance to provision.
+
+image::task1-2.png[task1-2]
+
+*  It will take about 10 minutes. *Let us know when you hit this stage as we will do a small presentation about ACS while we all wait.*
+
+image::task1-3.png[task1-3]

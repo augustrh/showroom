@@ -10,12 +10,14 @@ Your ROSA cluster is available at:
 |===
 | ROSA console URL: | {rosa_cluster_rosa_console_url}
 | ROSA user: | {rosa_cluster_rosa_admin_user}
-| ROSA password: | {rosa_cluster_rosa_console_password}
+| ROSA password: | {rrosa_cluster_rosa_admin_password}
 |===
 
-* Click on the OpenShift console link and use the provided User and Password details to login:
+* Click on the Rosa console URL and use the provided User and Password details to login:
 
 image::task4-1.png[task4-1]
+
+== Install the ACS Operator
 
 * Once logged in, click on "Operators" in left menu, then OperatorHub
 * In the Filter by Keyword box, search for ACS:
@@ -36,14 +38,32 @@ image::task4-5.png[task4-5]
 
 * Once the installation is complete, click on View Operator.
 
+== Install Secure Cluster
+
 * We now need to setup the Secure Cluster for your ROSA deployment. This is done in a few steps.
 
-* Using the Kubernetes Secrets file you downloaded in the previous task, create the secrets in your ROSA environment
+=== Download the secret
+
+Return to your ACS console and go to Platform Configuration -> Integrations and choose "Cluster Init Bundle" under Authentication Tokens. You'll remember this process from when we did this in the last module.
+
+image::task4-a.png[task4-a]
+
+Select "Create Bundle"
+
+image::task4-b.png[task4-b]
+
+Name the bundle, and choose "OpenShift" for the "Platform of secured clusters" selection. Choose "Operator (recommended)" as your Installtion method. This will allow you to download the required information needed for using ACS as an Operator on ROSA!
+
+Choose Download and save the file somewhere you can find it easily. :)
+
+=== Install the bundle 
+
+* Using the file you downloaded in the previous task, create the secrets in your ROSA environment
 
 image::task4-6.png[task4-6]
 
-* Click on the + sign in the top of the window, next to the bell icon.
-* Make sure you are in the rhacs-operator project and drag and drop the Kubernetes Secrets file yaml file into the window.
+* In ROSA click on the + sign in the top of the window, next to the bell icon.
+* Make sure you are in the rhacs-operator project and drag and drop the Kubernetes Secrets file yaml file you just downloaed into the window.
 
 image::task4-7.png[task4-7]
 

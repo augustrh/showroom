@@ -1,109 +1,167 @@
-= Identify vulnerable deployment
+= Identify and act on a vulnerable deployment
 
-You've just revieved some bad news about an ex-CandleCo employee.
+Now let's see how you can identity a vulnerable deployment and stop it in its tracks.
 
-A previous admin is rumored to have installed some cryptomining software somewhere in the environment.
+== Identity the affected deployment
 
-The legal team has requested you to see if this is true, and if you do find something to immeditaly stop it from working.
+Candleco has a cryptominer in one of its deployments. To find it go to Violations in the ACS console and search for viloations that have been detetced by the Cryptocurrency Mining Process policy.
 
-You're going to need to use RHACS to find the deployment running the code and get it under control!
+Use the "Filter violations" dialog to easily find all deployments with the vioaltion. 
 
-Luckily, RHACS has this power built in! Are you ready?
+image::task8-a.png[task8-a]
 
-== Step 1
+We can see now the deployment that has the violation ("candleco-images-deployment")
 
-* In RHACS go to the Violations section. Use the filter tools there to filter for a Policy that you think could be used to detect Cryptocurrency Mining Process Execution.
+== Viewing the violation
 
-image::task8-1.png[task8-1]
+Click on the "Cryptocurrency mining process spawned" heading for the candleco-images-deployment in "myEKS/candleco"
 
-== Step 2
+Here you can see a lot of interesting details about the violation. Click through the tabs to see what you can learn.
 
-* Now that you found the _Policy_ you can use it to track down the cryptominer. But first you need to configure the policy. You do this by _editing_ the policy.
+Look particularily at the "Deployment" tab. Here we can see that this violation is actually part of a RUNNING deployment in our cluster. That's not good!
 
-* You edit policies by going to *Platform Configuration > Policy Management*
+image::task8-d.png[task8-d]
 
-* Just like before you can filter by Policy for the type (Crypto) you want to change:
-
-image::task8-2.png[task8-2]
-
-* Once you find the policy you'll need to find the option to Edit it.
-
-* Review the various sections of the Policy that can be edited:
-
-image::task8-3.png[task8-3]
-
-* Now find the section that allows you to adjust the policy's behavior.
-
-* The default behavior for a policy is to Inform what it finds. This tells you what's wrong, but doesn't act on it.
-
-* Since we were asked to take action on the cryptominer you need to change the setting so it will also enforce as well as inform.
-
-image::task8-4.png[task8-4]
-
-* Additionally, so we can see the policy in action we need to set "Configure enforcement behavior" to apply enforcement at Runtime.
-
-* The "Inform and enforce" toggle reveals this option, don't miss it!
-
-image::task8-5.png[task8-5]
-
-* With that done you can save the policy.
-
-* The policy behavior section should indicate the following choices:
-
-image::task8-6.png[task8-6]
-
-== Step 3
-
-* Now it's time to see what the policy found and sort this out!
-
-* Head back to the RHACS dashboard and locate the *Policy violations by category* tile. You'll see the Crypto policy listed there. Click on it.
-
-image::task8-7.png[task8-7]
-
-* You now know what deployment the employee put their cryptominer into!
-
-* But notice that it still shows "No" under Enforced? That's because RHACS is set to monitor this at Runtime which means only newly started infected deployments will get stopped automatically by RHACS.
-
-== Step 4
-
-* Now we're going to see how RHACS handles that Runtime enforcement.
-
-* Go back to Cloud9 and delete the suspect pod using the following:
-
-_TIP: you'll need to use kubectl get pod -n candleco to find your pod's exact name so you can ru the command below_
+Let's view that from the EKS side; return to Cloud9 and view the deployments:
 
 [source,shell]
 ----
-kubectl delete pod -n candleco candleco-images-deployment-xxxxxxxxxxx 
+$ kubectl get deployments -n candleco
 ----
 
-Then watch as it restarts:
+You'll see that it's running! We need to stop that and we can use ACS to do just that.
+
+== Configure the policy to act on a violation
+
+Right now, all ACS has done is tell us we have a violation. But we can also have it address that violation. To do this we need to edit the Cryptominer policy settings.
+
+Go to Platform Configuration > Policy Managament and Filter for the Cryptominer Policy:
+
+image::task8-b.png[task8-b]
+
+Choose the 3 dots at the end of the line and select "Edit policy":
+
+image::task8-c.png[task8-c]
+
+Go to the "Policy behavior" section and find the "Response method" option:
+
+image::task8-e.png[task8-e]
+
+The response can be one of the following:
+
+*Inform: Policy violations generate a violation in the violations list.
+
+*Inform and enforce: The violation is enforced.
+
+Choosing "Inform and enforce" will reveal more options (you may need to scroll to see them)
+
+image::task8-f.png[task8-f]
+
+As you can see we can have our policies address violations at different stages of an app lifecycle. In our case, it's already running so we cannot choose to enforce on build or deploy (we'd need a new policy for that) but we can enforce on runtime. Then we can restart the deployment and have the policy address it.
+
+Slide the toggle for Runtime:
+
+image::task8-g.png[task8-g]
+
+Review the rest of the options, but leave them all as is for this exercise.
+
+Choose *Save* to save the policy.
+
+== Seeing the results of our policy
+
+Check to see what the deployment is doing:
 
 [source,shell]
 ----
-kubectl get pods -n candleco --watch
+kubectl get deployments -n candleco
 ----
 
-What do you see?
+Still running.
 
-=== Reveal output of watch command
+Let's find the images pod so we can stop it.
 
-[%collapsible]
-====
+[source,shell]
+----
+kubectl get pods -n candleco
+----
 
-* Each time the deployment tries to restart it is automatically terminated by ACS!
+You'll see a pod with a name like `candleco-images-deployment-64fd964b75-kzxmv `
 
-image::task8-8.gif[task8-8]
+Let's kill it and then watch what happens. Run the following command using the correct naming for your pod:
 
-====
+[source,shell]
+----
+kubectl delete pod candleco-images-deployment-64fd964b75-kzxmv -n candleco; kubectl get pods -n candleco --watch
+----
 
-== View the result in the ACS CS UI
+You should see the container try and restart (that's what it's set to do) and then ... voila, get terminated. That's ACS doing it's thing!
 
-* Head back to RHACS and use the dashboard to find the "Policy violations by category" tile.
+Isn't it great!!!?
 
-* Follow the Cryptocurrency Mining link and you can see the result.
+image::task8-h.png[task8-h]
 
-image::task8-9.png[task8-9]
+(as always, CTRL-C gets you out of the watch)
 
-*You've done it, you stopped the cryptominer!*
+== View this in ACS
 
+Return to ACS and go to the Violations dialog. You'll notice the "Enforced" section for the myEKS/candleco violation now reflects what you saw on the CLI:
+
+image::task8-i.png[task8-i]
+
+Click on the link and check out the "Enforcement" tab:
+
+image::task8-j.png[task8-j]
+
+Follow the links to learn more.
+
+== Bonus
+
+You may have noticed this is also running on your ROSA cluster. Your Cloud 9 environment has an oc client on it. See if you remediate the process on there, too!.
+
+Hint: You can get login token for your CLI in ROSA from and choosing "Copy login command" and then logging in and selecting "Display Token":
+
+image::task8-k.png[task8-k]
+
+Just copy the oc login line and run this on your Cloud9 CLI:
+
+image::task8-l.png[task8-l]
+
+As before, look for the deployment:
+
+[source,shell]
+----
+$ oc get deployments -n candleco                                                                                                                                               
+NAME                         READY   UP-TO-DATE   AVAILABLE   AGE
+adservice                    1/1     1            1           4h5m
+candleco-images-deployment   1/1     1            1           4h5m
+cartservice                  1/1     1            1           4h5m
+checkoutservice              1/1     1            1           4h5m
+currencyservice              1/1     1            1           4h4m
+emailservice                 1/1     1            1           4h4m
+frontend                     1/1     1            1           4h4m
+loadgenerator                1/1     1            1           4h4m
+paymentservice               1/1     1            1           4h4m
+productcatalogservice        1/1     1            1           4h4m
+recommendationservice        1/1     1            1           4h4m
+redis-cart                   1/1     1            1           4h4m
+shippingservice              1/1     1            1           4h4m
+open-environment-vr8lq-1-admin:~/environment $ 
+----
+
+Find the pod:
+
+[source,shell]
+----
+oc get pods -n candleco | grep candleco-images-deployment 
+----
+
+And delete the pod:
+
+[source,shell]
+----
+oc delete pod candleco-images-deployment-6db8fdf68d-rtz9p -n candleco; oc get pods -n candleco --watch
+----
+
+Et voila! The policy has kicked in and secured ROSA. 
+
+As you can see, using ACS with EKS, ROSA, and any compliant K8s distro is a snap! Time to go sell some flowery candles!

@@ -6,13 +6,14 @@
 
 == Performing a Scan
 
-* From ACS CS Select "Compliance" on the left side menu.
+* From ACS CS Select "Compliance (1.0)" on the left side menu and then choose the "Scan environment" button.
 
-image::task5-1.png[task5-1]
+image::task5-4.png[task5-4]
 
-* Click on "Scan Environment" button in the top right of the window.
+You'll see results immediately!
 
-image::task5-2.png[task5-2]
+image::task5-5.png[task5-5]
+
 
 == Exporting the report
 
@@ -32,6 +33,9 @@ $ aws s3 mv FILENAME s3://$S3BUCKET
 ----
 
 _TIP: the name of the S3 bucket is saved in the environment varible *$S3BUCKET* :)_
+
+image::task5-6.png[task5-6]
+
 
 
 

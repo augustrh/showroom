@@ -10,7 +10,7 @@ To do this you're going to connect CandleCo's ECR to your ACS CS instance and sc
 
 * You need to gather a few details, such as your ECR registry ID, AWS Region, and the key and secret key for the precreated AWS ECR user to use with this task.
 
-* Follow the steps below on your Cloud9 instance to get record the values.
+* Follow the steps below on your Cloud9 instance and record the values.
 
 * Get your registry ID and images:
 
@@ -33,6 +33,7 @@ $ echo $AWS_REGION
 |===
 | AWS Access Key: | {eks_cluster_aws_access_key_id}
 | AWS Secret Access Key: | {eks_cluster_aws_secret_access_key}
+| AWS ID: | {eks_cluster_aws_account_id}
 |===
 
 == Connect ACS CS and ECR
@@ -71,7 +72,7 @@ image::task6-4.png[task6-4]
 
 image::task6-5.png[task6-5]
 
-* Add all the images you retrieved on the Cloud9 console above to be watched.
+* Add each of the images you retrieved on the Cloud9 console above to be watched.
 
 image::task6-6.png[task6-6]
 
