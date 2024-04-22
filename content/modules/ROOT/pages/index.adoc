@@ -10,10 +10,10 @@ You quickly realize that while you currently use Red Hat OpenShift Service on AW
 
 Your developers and the CandleCo devs are happy to use either as they both provide Kubernetes offerings, but you need to review the security implications of doing this.
 
-Rather than find security solutions for each platform, you speak to your friendly Red Hat rep and they tell you about Advanced Cluster Security for Kubernetes - Cloud Services edition! Apparently, you can secure both environments with the same tool, saving time, money, and complexity in the process!
+Rather than find security solutions for each platform, you speak to your friendly Red Hat rep and they tell you about Advanced Cluster Security for Kubernetes - Cloud Service edition! Apparently, you can secure both environments with the same tool, saving time, money, and complexity in the process!
 
 Are you ready to find out more?!
 
-In this lab, you will use Red Hat Advanced Cluster Security Cloud Services (RHACS CS) to manage and protect your container environments across your clouds!
+In this lab, you will use Red Hat Advanced Cluster Security Cloud Service (RHACS CS) to manage and protect your container environments across your clouds!
 
 image::RH-Leaves_minis.png[RH-Leaves_minis,55%,55%]
