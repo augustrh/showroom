@@ -68,7 +68,7 @@ image::task3-5.png[task3-5]
 
 == Create a Red Hat Service Account and get its token
 
-Login to the https://access.redhat.com/terms-based-registry/[Red Hat console] and create a service account.
+Login to the https://access.redhat.com/terms-based-registry/[Red Hat console,window=_blank] and create a service account.
 
 * You'll need this to retrieve the RHACS images from the Red Hat registry with your Red Hat credentials.
 
