@@ -8,9 +8,9 @@ Your ROSA cluster is available at:
 
 [%autowidth,frame=ends,stripes=even]
 |===
-| ROSA console URL: | {rosa_cluster_rosa_console_url}[{rosa_cluster_rosa_console_url}^]
-| ROSA user: | {rosa_cluster_rosa_admin_user}
-| ROSA password: | {rosa_cluster_rosa_admin_password}
+| ROSA console URL: | {rosa_cluster_rosa_openshift_console_url}[{rosa_cluster_rosa_openshift_console_url}^]
+| ROSA user: | {rosa_cluster_rosa_openshift_admin_user}
+| ROSA password: | {rosa_cluster_rosa_openshift_admin_password}
 |===
 
 * Click on the Rosa console URL and use the provided User and Password details to login:
